@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/layout_appbar_empty" />
+
+    <FrameLayout
+        android:id="@+id/layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:fabAlignmentMode="center"
+        app:fabAnimationMode="slide"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="15dp"
+        app:hideOnScroll="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:tint="@color/medium_grey"
+                app:srcCompat="@drawable/ic_menu_white_24dp" />
+
+            <ImageButton
+                android:id="@+id/btn_home"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:tint="@color/medium_grey"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_home_white_24dp"
+                tools:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/btn_profile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:tint="@color/medium_grey"
+                app:srcCompat="@drawable/ic_profile_white_24dp" />
+
+        </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        app:fabSize="normal"
+        app:layout_anchor="@id/bottom_app_bar"
+        app:layout_behavior="com.core.app.ui.custom.FabHideBehavior"
+        app:srcCompat="@drawable/ic_home_white_24dp" />
+
+    <include
+        layout="@layout/layout_ghost_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        app:layout_anchor="@+id/layout_main"
+        app:layout_anchorGravity="bottom|center_horizontal" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

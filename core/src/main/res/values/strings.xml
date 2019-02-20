@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="processing_msg">Processing…</string>
+    <string name="empty_list_msg">Whoops! We couldn\'t find anything!</string>
+    <string name="unknown_error_msg">Whoops! Some unknown error occurred!</string>
+    <string name="network_error_msg">It seems you have lost network connectivity.</string>
+    <string name="fcm_not_supported_msg">This device is not supported for receiving fcm push notifications</string>
+    <string name="custom_endpoint_desc">Enter the URL of the server to which you want to connect.</string>
+
+    <string name="app_restart_msg">Do you want to restart the application?</string>
+    <string name="search_error_msg">Search query should contain at least 3 characters!</string>
+    <string name="app_exit_msg">Press back again to exit!</string>
+
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="default_notification_channel_name">Updates</string>
+
+    <string name="btn_ok">OK</string>
+    <string name="btn_no">No</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_done">Done</string>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_reject">Reject</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_proceed">Proceed</string>
+
+    <string name="hint_search">Search…</string>
+
+    <string name="appbar_transition">appbar_transition</string>
+    <string name="thumb_transition">thumb_transition</string>
+    <string name="title_transition">title_transition</string>
+    <string name="desc_transition">desc_transition</string>
+
+    <string name="menu_user_type">User type</string>
+    <string name="menu_normal">Normal</string>
+    <string name="menu_super">Super</string>
+
+    <string name="menu_environment">Environment</string>
+    <string name="menu_mock">Mock</string>
+    <string name="menu_release">Release</string>
+    <string name="menu_custom">Custom</string>
+
+</resources>

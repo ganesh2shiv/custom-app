@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+
+apply from: '../config.gradle'
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVer}"
+
+    annotationProcessor "org.parceler:parceler:${parcelerVer}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVer}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVer}"
+    annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVer}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${glideVer}"
+
+    // DI
+    api "com.google.dagger:dagger:${daggerVer}"
+    api "com.google.dagger:dagger-android:${daggerVer}"
+    api "com.google.dagger:dagger-android-support:${daggerVer}"
+    api "com.jakewharton:butterknife:${butterKnifeVer}"
+
+    // Rx
+    api "io.reactivex.rxjava2:rxjava:2.2.3"
+    api "io.reactivex.rxjava2:rxandroid:2.1.0"
+    api "com.github.tbruyelle:rxpermissions:0.10.2"
+    api "com.github.pwittchen:reactivenetwork-rx2:0.12.3"
+    api "pl.charmas.android:android-reactive-location2:2.1@aar"
+    api "com.jakewharton.rxbinding2:rxbinding:${rxBindingVer}"
+    api "com.jakewharton.rxbinding2:rxbinding-design:${rxBindingVer}"
+    api "com.jakewharton.rxbinding2:rxbinding-support-v4:${rxBindingVer}"
+    api "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rxBindingVer}"
+
+    // UI
+    api "com.caverock:androidsvg-aar:1.3"
+    api "me.relex:circleindicator:1.2.2@aar"
+    api "de.hdodenhof:circleimageview:3.0.0"
+    api "com.airbnb.android:epoxy:${epoxyVer}"
+    api "com.github.chrisbanes:PhotoView:2.1.3"
+    api "com.github.santalu:auto-viewpager:1.0.6"
+    api "com.mobsandgeeks:android-saripaar:2.0.3"
+    api "com.github.bumptech.glide:glide:${glideVer}"
+    api "com.github.castorflex.smoothprogressbar:library:1.1.0"
+    api "com.github.castorflex.smoothprogressbar:library-circular:1.3.0"
+
+    // Google
+    api "com.google.firebase:firebase-core:16.0.6"
+    api "com.google.android.material:material:1.1.0-alpha02"
+    api "com.google.firebase:firebase-messaging:${firebaseVer}"
+    api "com.google.android.gms:play-services-gcm:${playServicesVer}"
+    api "com.google.android.gms:play-services-location:${playServicesVer}"
+    api "com.google.android.gms:play-services-base:${playServicesVer}"
+
+    // AndroidX
+    api "androidx.multidex:multidex:2.0.1"
+    api "androidx.cardview:cardview:1.0.0"
+    api "androidx.appcompat:appcompat:1.0.2"
+    api "androidx.preference:preference:1.0.0"
+    api "androidx.legacy:legacy-support-v4:1.0.0"
+    api "androidx.recyclerview:recyclerview:1.0.0"
+    api "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
+
+    // Network
+    api "com.squareup.retrofit2:retrofit:${retrofitVer}"
+    api "com.squareup.retrofit2:converter-gson:${retrofitVer}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${retrofitVer}"
+    api "com.squareup.okhttp3:logging-interceptor:${okhttpVer}"
+    releaseApi "com.readystatesoftware.chuck:library-no-op:${chuckVer}"
+    debugApi "com.readystatesoftware.chuck:library:${chuckVer}"
+
+    // Util
+    api "id.zelory:compressor:2.1.0"
+    api "org.greenrobot:eventbus:3.1.1"
+    api "com.jakewharton.timber:timber:4.7.1"
+    api "com.github.jrvansuita:PickImage:2.2.4"
+    api "com.jakewharton:process-phoenix:2.0.0"
+    api "org.parceler:parceler-api:${parcelerVer}"
+}

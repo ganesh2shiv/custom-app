@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryDark">@color/green</item>
+
+        <item name="colorSecondary">@color/green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/dark_green</item>
+        <item name="colorSecondaryVariant">@color/dark_green</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/average_grey</item>
+
+        <item name="android:textColor">@color/average_grey</item>
+        <item name="colorAccent">@color/green</item>
+        <item name="colorControlHighlight">@color/lighter_grey</item>
+        <item name="colorControlNormal">@color/green</item>
+        <item name="colorControlActivated">@color/green</item>
+        <item name="spinnerStyle">@style/CustomSpinner</item>
+        <item name="android:spinnerStyle">@style/CustomSpinner</item>
+        <item name="android:fontFamily">@font/app_font</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="searchViewStyle">@style/CustomSearchView</item>
+        <item name="android:navigationBarColor">@color/white</item>
+    </style>
+
+    <style name="CustomAppTheme.Translucent">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/white</item>
+    </style>
+
+    <style name="CustomProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="cpb_color">@color/black</item>
+        <item name="cpb_stroke_width">2dp</item>
+    </style>
+
+    <style name="CustomToolbarTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/app_font</item>
+    </style>
+
+    <style name="CustomTabTitle" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/app_font</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="CustomSearchView" parent="Widget.AppCompat.Light.SearchView">
+        <item name="searchIcon">@null</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="queryBackground">@color/blue</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="queryHint">@string/hint_search</item>
+    </style>
+
+    <style name="CustomSpinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="overlapAnchor">false</item>
+        <item name="android:background">@drawable/shape_rect_solid_round_white</item>
+    </style>
+
+    <style name="CustomPopupMenu" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:textColor">@color/average_grey</item>
+    </style>
+
+    <style name="CustomDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/dark_green</item>
+        <item name="materialButtonStyle">@style/Widget.AppCompat.Button.Borderless</item>
+        <item name="android:textColorPrimary">@color/average_grey</item>
+    </style>
+
+</resources>
