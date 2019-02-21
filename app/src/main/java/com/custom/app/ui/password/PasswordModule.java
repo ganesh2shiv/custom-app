@@ -3,12 +3,8 @@ package com.custom.app.ui.password;
 import com.core.app.data.user.UserManager;
 import com.custom.app.network.RestService;
 import com.custom.app.ui.logout.LogoutInteractor;
-import com.custom.app.ui.password.change.ChangePasswordInteractor;
-import com.custom.app.ui.password.change.ChangePasswordInteractorImpl;
 import com.custom.app.ui.password.change.ChangePasswordPresenter;
 import com.custom.app.ui.password.change.ChangePasswordPresenterImpl;
-import com.custom.app.ui.password.forgot.ForgotPasswordInteractor;
-import com.custom.app.ui.password.forgot.ForgotPasswordInteractorImpl;
 import com.custom.app.ui.password.forgot.ForgotPasswordPresenter;
 import com.custom.app.ui.password.forgot.ForgotPasswordPresenterImpl;
 
@@ -19,23 +15,18 @@ import dagger.Provides;
 public class PasswordModule {
 
     @Provides
-    ForgotPasswordInteractor provideForgotPasswordInteractor(RestService restService) {
-        return new ForgotPasswordInteractorImpl(restService);
+    PasswordInteractor providePasswordInteractor(RestService restService, UserManager userManager) {
+        return new PasswordInteractorImpl(restService, userManager);
     }
 
     @Provides
-    ForgotPasswordPresenter provideForgotPasswordPresenter(ForgotPasswordInteractor interactor) {
+    ForgotPasswordPresenter provideForgotPasswordPresenter(PasswordInteractor interactor) {
         return new ForgotPasswordPresenterImpl(interactor);
     }
 
     @Provides
-    ChangePasswordInteractor provideChangePasswordInteractor(RestService restService, UserManager userManager) {
-        return new ChangePasswordInteractorImpl(restService, userManager);
-    }
-
-    @Provides
-    ChangePasswordPresenter provideChangePasswordPresenter(ChangePasswordInteractor changeInteractor,
+    ChangePasswordPresenter provideChangePasswordPresenter(PasswordInteractor passwordInteractor,
                                                            LogoutInteractor logoutInteractor) {
-        return new ChangePasswordPresenterImpl(changeInteractor, logoutInteractor);
+        return new ChangePasswordPresenterImpl(passwordInteractor, logoutInteractor);
     }
 }

@@ -1,14 +1,16 @@
 package com.custom.app.ui.password.forgot;
 
+import com.custom.app.ui.password.PasswordInteractor;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class ForgotPasswordPresenterImpl extends ForgotPasswordPresenter {
 
     private ForgotPasswordView view;
-    private ForgotPasswordInteractor interactor;
+    private PasswordInteractor interactor;
 
-    public ForgotPasswordPresenterImpl(ForgotPasswordInteractor interactor) {
+    public ForgotPasswordPresenterImpl(PasswordInteractor interactor) {
         this.interactor = interactor;
     }
 

@@ -1,6 +1,7 @@
 package com.custom.app.ui.password.change;
 
 import com.custom.app.ui.logout.LogoutInteractor;
+import com.custom.app.ui.password.PasswordInteractor;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -8,10 +9,10 @@ import io.reactivex.schedulers.Schedulers;
 public class ChangePasswordPresenterImpl extends ChangePasswordPresenter {
 
     private ChangePasswordView view;
-    private ChangePasswordInteractor passwordInteractor;
+    private PasswordInteractor passwordInteractor;
     private LogoutInteractor logoutInteractor;
 
-    public ChangePasswordPresenterImpl(ChangePasswordInteractor passwordInteractor, LogoutInteractor logoutInteractor) {
+    public ChangePasswordPresenterImpl(PasswordInteractor passwordInteractor, LogoutInteractor logoutInteractor) {
         this.passwordInteractor = passwordInteractor;
         this.logoutInteractor = logoutInteractor;
     }
