@@ -22,7 +22,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.IdRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -41,8 +40,6 @@ import static com.custom.app.util.Constants.PROFILE_FRAGMENT;
 
 public class HomeActivity extends BaseHome implements OnBackStackChangedListener,
         HomeFragment.Callback, MenuDialog.Callback, LogoutDialog.Callback {
-
-    private int selectedItemId;
 
     @BindView(R.id.appbar_layout)
     AppBarLayout appBarLayout;
@@ -84,12 +81,12 @@ public class HomeActivity extends BaseHome implements OnBackStackChangedListener
 
     @OnClick(R.id.btn_home)
     public void openHome(View view) {
-        navigateScreen(R.id.item_home);
+        showHomeFragment();
     }
 
     @OnClick(R.id.btn_profile)
     public void openProfile(View view) {
-        navigateScreen(R.id.item_profile);
+        showFragment(INT_CONST_FOR_PROFILE_FRAGMENT, ProfileFragment.newInstance(), PROFILE_FRAGMENT);
     }
 
     @OnClick(R.id.btn_menu)
@@ -141,17 +138,6 @@ public class HomeActivity extends BaseHome implements OnBackStackChangedListener
         showFragment(INT_CONST_FOR_HOME_FRAGMENT, HomeFragment.newInstance(), HOME_FRAGMENT);
     }
 
-    private void navigateScreen(@IdRes int itemId) {
-        switch (itemId) {
-            case R.id.item_home:
-                showHomeFragment();
-                break;
-            case R.id.item_profile:
-                showFragment(INT_CONST_FOR_PROFILE_FRAGMENT, ProfileFragment.newInstance(), PROFILE_FRAGMENT);
-                break;
-        }
-    }
-
     @Override
     public void onBackStackChanged() {
         setNavFragment(getSupportFragmentManager().findFragmentById(R.id.layout_main));
@@ -159,29 +145,15 @@ public class HomeActivity extends BaseHome implements OnBackStackChangedListener
 
     private void setNavFragment(Fragment fragment) {
         if (fragment instanceof HomeFragment) {
-            setNavSelectedItem(R.id.item_home);
+            bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
+            fabAction.setImageResource(R.drawable.ic_home_white_24dp);
+            btnProfile.setVisibility(View.VISIBLE);
+            btnHome.setVisibility(View.INVISIBLE);
         } else if (fragment instanceof ProfileFragment) {
-            setNavSelectedItem(R.id.item_profile);
-        }
-    }
-
-    private void setNavSelectedItem(@IdRes int itemId) {
-        if (selectedItemId != itemId) {
-            switch (itemId) {
-                case R.id.item_home:
-                    bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
-                    fabAction.setImageResource(R.drawable.ic_home_white_24dp);
-                    btnProfile.setVisibility(View.VISIBLE);
-                    btnHome.setVisibility(View.INVISIBLE);
-                    break;
-                case R.id.item_profile:
-                    bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
-                    fabAction.setImageResource(R.drawable.ic_profile_white_24dp);
-                    btnProfile.setVisibility(View.INVISIBLE);
-                    btnHome.setVisibility(View.VISIBLE);
-                    break;
-            }
-            selectedItemId = itemId;
+            bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+            fabAction.setImageResource(R.drawable.ic_profile_white_24dp);
+            btnProfile.setVisibility(View.INVISIBLE);
+            btnHome.setVisibility(View.VISIBLE);
         }
     }
 
