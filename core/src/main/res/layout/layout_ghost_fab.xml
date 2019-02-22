@@ -5,8 +5,8 @@
     android:id="@+id/ghost_fab"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/ic_ghost_white_24dp"
     android:visibility="gone"
     app:backgroundTint="@color/average_grey"
     app:fabSize="normal"
+    app:srcCompat="@drawable/ic_ghost_white_24dp"
     tools:visibility="visible" />

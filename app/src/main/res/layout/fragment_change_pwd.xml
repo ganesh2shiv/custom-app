@@ -106,11 +106,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@color/green"
         android:gravity="center"
         android:text="@string/btn_save"
         android:textSize="15sp"
         android:textStyle="bold"
+        app:backgroundTint="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/til_confirm_pwd" />

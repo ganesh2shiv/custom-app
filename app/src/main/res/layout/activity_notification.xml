@@ -40,13 +40,13 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="32dp"
-        android:src="@drawable/ic_clear_all_white_24dp"
         android:visibility="gone"
         app:backgroundTint="@color/green"
         app:fabSize="normal"
         app:layout_anchor="@id/swipe_layout"
         app:layout_anchorGravity="bottom|end"
         app:layout_behavior="com.core.app.ui.custom.FabHideBehavior"
+        app:srcCompat="@drawable/ic_clear_all_white_24dp"
         tools:visibility="visible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -73,7 +73,7 @@
         android:id="@+id/fab_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
+        app:backgroundTint="@color/green"
         app:fabSize="normal"
         app:layout_anchor="@id/bottom_app_bar"
         app:layout_behavior="com.core.app.ui.custom.FabHideBehavior"
