@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="account_type">com.custom.app.account</string>
+
+    <string name="menu_theme">Theme</string>
+    <string name="menu_light">Light</string>
+    <string name="menu_dark">Dark</string>
+
+    <string name="menu_environment">Environment</string>
+    <string name="menu_mock">Mock</string>
+    <string name="menu_release">Release</string>
+    <string name="menu_custom">Custom</string>
+
+    <string name="hint_url">https://…</string>
+
+    <string name="custom_endpoint_desc">Enter the URL of the server to which you want to connect.</string>
+    <string name="network_error_msg">It seems you have lost network connectivity.</string>
+
+</resources>

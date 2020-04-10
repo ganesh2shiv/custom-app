@@ -32,16 +32,18 @@ android {
 }
 
 ext {
-    glideVer          = '4.8.0'
-    chuckVer          = '1.1.0'
+    glideVer          = '4.11.0'
     epoxyVer          = '2.18.0'
     daggerVer         = '2.18'
     okhttpVer         = '3.11.0'
+    chuckerVer        = '3.0.1'
     retrofitVer       = '2.4.0'
-    parcelerVer       = '1.1.11'
-    firebaseVer       = '17.3.4'
+    parcelerVer       = '1.1.12'
+    firebaseVer       = '19.0.0'
+    lifecycleVer      = '2.2.0'
+    autovalueVer      = '1.5'
     rxBindingVer      = '2.2.0'
-    butterKnifeVer    = '9.0.0-rc1'
-    playServicesVer   = '16.0.0'
+    butterKnifeVer    = '10.2.1'
+    playServicesVer   = '17.0.0'
     supportLibraryVer = '28.0.0'
 }

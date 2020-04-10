@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.butterknife'
+
+apply from: '../config.gradle'
+
+dependencies {
+    implementation project(':core')
+
+    annotationProcessor "org.parceler:parceler:${parcelerVer}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVer}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVer}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVer}"
+    annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVer}"
+
+    api "pl.charmas.android:android-reactive-location2:2.1@aar"
+    api "com.google.android.gms:play-services-location:${playServicesVer}"
+}

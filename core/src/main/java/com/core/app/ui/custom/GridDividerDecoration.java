@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class GridDividerDecoration extends RecyclerView.ItemDecoration {
@@ -21,7 +22,8 @@ public class GridDividerDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(@NonNull Canvas canvas, @NonNull RecyclerView parent,
+                           @NonNull RecyclerView.State state) {
         drawVertical(canvas, parent);
         drawHorizontal(canvas, parent);
     }

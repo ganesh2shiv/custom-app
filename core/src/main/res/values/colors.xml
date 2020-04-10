@@ -2,7 +2,7 @@
 <resources>
 
     <color name="transparent">#00000000</color>
-    <color name="trans_grey">#a04c4c50</color>
+    <color name="trans_grey">#b3ffffff</color>
     <color name="white">#ffffff</color>
     <color name="light_grey">#f2f2f2</color>
     <color name="lighter_grey">#d3d3d3</color>
@@ -15,10 +15,13 @@
     <color name="blue">#5192ce</color>
     <color name="dark_blue">#136eb1</color>
     <color name="yellow">#cebd30</color>
+    <color name="golden">#c1982b</color>
     <color name="orange">#fe4c13</color>
+    <color name="light_orange">#f29720</color>
     <color name="red">#ff0000</color>
     <color name="light_red">#d9534f</color>
-    <color name="green">#55B02F</color>
-    <color name="dark_green">#159B14</color>
+    <color name="green">#ffa500</color>
+    <color name="dark_green">#ffa500</color>
+    <color name="trans_green">#1fffa500</color>
 
 </resources>

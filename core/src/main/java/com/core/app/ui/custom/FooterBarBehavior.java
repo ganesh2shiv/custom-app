@@ -5,9 +5,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.google.android.material.appbar.AppBarLayout;
-
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 public class FooterBarBehavior extends CoordinatorLayout.Behavior<FrameLayout> {
 
@@ -19,12 +20,13 @@ public class FooterBarBehavior extends CoordinatorLayout.Behavior<FrameLayout> {
     }
 
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, FrameLayout child, View dependency) {
+    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull FrameLayout child,
+                                   @NonNull View dependency) {
         return dependency instanceof AppBarLayout;
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, FrameLayout child, View dependency) {
+    public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, FrameLayout child, View dependency) {
         int offset = -dependency.getTop();
         child.setTranslationY(offset);
         return true;

@@ -38,17 +38,17 @@ public abstract class InfiniteScrollListener extends RecyclerView.OnScrollListen
         return lastItemShown && totalItemsCount >= maxItemsPerRequest;
     }
 
-    public abstract void onScrolledToEnd(final int firstVisibleItemPosition);
+    abstract void onScrolledToEnd(final int firstVisibleItemPosition);
 
-    private void checkNotNull(Object object, String message) {
+    private void checkNotNull(Object object, String msg) {
         if (object == null) {
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(msg);
         }
     }
 
-    private void checkIfPositive(int number, String message) {
+    private void checkIfPositive(int number, String msg) {
         if (number <= 0) {
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(msg);
         }
     }
 }

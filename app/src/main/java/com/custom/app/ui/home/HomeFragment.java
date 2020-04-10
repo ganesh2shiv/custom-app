@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.core.app.ui.base.BaseFragment;
-import com.custom.app.CustomApp;
-import com.custom.app.R;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.base.app.ui.base.BaseFragment;
+import com.custom.app.R;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -27,23 +28,18 @@ public class HomeFragment extends BaseFragment implements HomeView {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         callback = (Callback) context;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        ((CustomApp) getActivity().getApplication()).getHomeComponent().inject(this);
-    }
-
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+
         return rootView;
     }
 
@@ -57,7 +53,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
             Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
             if (toolbar != null) {
-                toolbar.setTitle(getString(R.string.title_home));
+                ((TextView) toolbar.findViewById(R.id.title)).setText(getString(R.string.title_home));
             }
         }
     }

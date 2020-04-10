@@ -27,11 +27,11 @@ public class ForgotPasswordPresenterImpl extends ForgotPasswordPresenter {
         disposable = interactor.forgotPassword(username)
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(message -> {
+                .subscribe(msg -> {
                     hideProgressBar();
 
                     if (isViewAttached()) {
-                        view.showLoginScreen(message);
+                        view.showLoginScreen(msg);
                     }
                 }, error -> {
                     hideProgressBar();

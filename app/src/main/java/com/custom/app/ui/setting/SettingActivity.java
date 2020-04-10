@@ -2,11 +2,12 @@ package com.custom.app.ui.setting;
 
 import android.os.Bundle;
 
-import com.core.app.ui.base.BaseActivity;
-import com.custom.app.R;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+
+import com.base.app.ui.base.BaseActivity;
+import com.custom.app.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

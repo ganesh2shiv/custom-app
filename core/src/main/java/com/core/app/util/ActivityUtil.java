@@ -30,6 +30,7 @@ public class ActivityUtil {
     public static void startActivity(AppCompatActivity activity, Intent intent,
                                      ActivityOptionsCompat options, boolean finish) {
         activity.startActivity(intent, options.toBundle());
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         if (finish) {
             activity.finish();
         }
@@ -43,6 +44,23 @@ public class ActivityUtil {
     public static void startActivityResult(AppCompatActivity activity, Intent intent,
                                            int requestCode, boolean finish) {
         activity.startActivityForResult(intent, requestCode);
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        if (finish) {
+            activity.finish();
+        }
+    }
+
+    public static void startActivityResult(AppCompatActivity activity, Class clazz,
+                                           ActivityOptionsCompat options, int requestCode,
+                                           boolean finish) {
+        startActivityResult(activity, new Intent(activity, clazz), options, requestCode, finish);
+    }
+
+    public static void startActivityResult(AppCompatActivity activity, Intent intent,
+                                           ActivityOptionsCompat options, int requestCode,
+                                           boolean finish) {
+        activity.startActivityForResult(intent, requestCode, options.toBundle());
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         if (finish) {
             activity.finish();
         }

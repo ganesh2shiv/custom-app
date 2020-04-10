@@ -1,10 +1,10 @@
 package com.custom.app.ui.login;
 
-import com.core.app.data.user.UserData;
-import com.core.app.ui.base.BaseView;
+import com.base.app.ui.base.BaseView;
+import com.custom.app.data.model.login.LoginResponse;
 
 interface LoginView extends BaseView {
 
-    void showHomeScreen(UserData userData);
+    void showHomeScreen(LoginResponse response);
 
 }

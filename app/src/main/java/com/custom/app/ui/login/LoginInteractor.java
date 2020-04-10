@@ -1,11 +1,11 @@
 package com.custom.app.ui.login;
 
-import com.core.app.data.user.UserData;
+import com.custom.app.data.model.login.LoginResponse;
 
 import io.reactivex.Single;
 
 public interface LoginInteractor {
 
-    Single<UserData> login(String username, String password);
+    Single<LoginResponse> login(String username, String password);
 
 }

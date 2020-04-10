@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.butterknife'
+
+apply from: '../config.gradle'
+
+dependencies {
+    api project(':core')
+    api project(':data')
+    api project(':user')
+    api project(':media')
+    api project(':network')
+    api project(':location')
+
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    annotationProcessor "org.parceler:parceler:${parcelerVer}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVer}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVer}"
+    annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVer}"
+}

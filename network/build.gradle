@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.butterknife'
+
+apply from: '../config.gradle'
+
+dependencies {
+    implementation project(':core')
+    implementation project(':data')
+    implementation project(':user')
+
+    annotationProcessor "org.parceler:parceler:${parcelerVer}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVer}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVer}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVer}"
+    annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVer}"
+
+    api "com.github.pwittchen:reactivenetwork-rx2:0.12.3"
+    api "com.squareup.retrofit2:converter-gson:${retrofitVer}"
+    debugApi "com.github.ChuckerTeam.Chucker:library:${chuckerVer}"
+    releaseApi "com.github.ChuckerTeam.Chucker:library-no-op:${chuckerVer}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVer}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVer}"
+    implementation "com.squareup.retrofit2:converter-scalars:${retrofitVer}"
+}

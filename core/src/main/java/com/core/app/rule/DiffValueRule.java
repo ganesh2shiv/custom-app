@@ -28,14 +28,14 @@ class DiffValueRule<CONFIRM extends Annotation, SOURCE extends Annotation, DATA_
         int nSourceViews = sourceViews.size();
 
         if (nSourceViews == 0) {
-            String message = String.format(
+            String msg = String.format(
                     "You should have a view annotated with '%s' to use '%s'.",
                     mSourceClass.getName(), mConfirmClass.getName());
-            throw new IllegalStateException(message);
+            throw new IllegalStateException(msg);
         } else if (nSourceViews > 1) {
-            String message = String.format(
+            String msg = String.format(
                     "More than 1 field annotated with '%s'.", mSourceClass.getName());
-            throw new IllegalStateException(message);
+            throw new IllegalStateException(msg);
         }
 
         // There's only one, then we're good to go :)

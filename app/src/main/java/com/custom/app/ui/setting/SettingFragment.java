@@ -2,9 +2,7 @@ package com.custom.app.ui.setting;
 
 import android.os.Bundle;
 import android.view.View;
-
-import com.core.app.util.Util;
-import com.custom.app.R;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +11,9 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.core.app.util.Util;
+import com.custom.app.R;
 
 public class SettingFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener {
 
@@ -42,7 +43,7 @@ public class SettingFragment extends PreferenceFragmentCompat implements OnPrefe
         if (getActivity() != null) {
             Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
             if (toolbar != null) {
-                toolbar.setTitle(getString(R.string.title_settings));
+                ((TextView) toolbar.findViewById(R.id.title)).setText(getString(R.string.title_settings));
             }
         }
     }

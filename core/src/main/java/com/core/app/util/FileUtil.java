@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -97,6 +98,21 @@ public class FileUtil {
             fileCacher.writeCache(fileName, bitmap);
         } catch (IOException e) {
             Timber.e(e);
+        }
+    }
+
+    public static void delete(String filePath) {
+        if (!TextUtils.isEmpty(filePath)) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                if (file.delete()) {
+                    Timber.d("File at path %s deleted!", filePath);
+                } else {
+                    Timber.d("Error deleting file at path %s", filePath);
+                }
+            }
+        } else {
+            Timber.d("File path is empty!");
         }
     }
 

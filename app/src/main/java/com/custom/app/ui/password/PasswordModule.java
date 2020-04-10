@@ -1,12 +1,12 @@
 package com.custom.app.ui.password;
 
-import com.core.app.data.user.UserManager;
 import com.custom.app.network.RestService;
 import com.custom.app.ui.logout.LogoutInteractor;
 import com.custom.app.ui.password.change.ChangePasswordPresenter;
 import com.custom.app.ui.password.change.ChangePasswordPresenterImpl;
 import com.custom.app.ui.password.forgot.ForgotPasswordPresenter;
 import com.custom.app.ui.password.forgot.ForgotPasswordPresenterImpl;
+import com.user.app.data.UserManager;
 
 import dagger.Module;
 import dagger.Provides;

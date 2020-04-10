@@ -27,7 +27,8 @@ public abstract class DelayedClickListener implements View.OnClickListener {
         long currentTimestamp = SystemClock.uptimeMillis();
 
         lastClickMap.put(view, currentTimestamp);
-        if (previousClickTimestamp == null || (currentTimestamp - previousClickTimestamp > minimumInterval)) {
+        if (previousClickTimestamp == null
+                || (currentTimestamp - previousClickTimestamp > minimumInterval)) {
             onClicked(view);
         }
     }

@@ -5,8 +5,7 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 
 public class OldPasswordRule extends DiffValueRule<OldPassword, Password, String> {
 
-    protected OldPasswordRule(final ValidationContext validationContext,
-                              final OldPassword oldPassword) {
+    protected OldPasswordRule(final ValidationContext validationContext, final OldPassword oldPassword) {
         super(validationContext, oldPassword, Password.class);
     }
 

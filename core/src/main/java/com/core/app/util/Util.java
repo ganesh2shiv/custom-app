@@ -1,64 +1,86 @@
 package com.core.app.util;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Handler;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.core.content.ContextCompat;
+
 import com.core.app.R;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.processphoenix.ProcessPhoenix;
 
-import java.util.List;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import timber.log.Timber;
+import java.util.List;
+import java.util.Random;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class Util {
 
     private Util() {
     }
 
-    public static void showSoftKeyboard(final Context context, final EditText editText) {
-        editText.requestFocus();
-        new Handler().postDelayed(() -> {
-            final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static byte[] convertHexToBytes(String hexString) {
+        char[] hex = hexString.toCharArray();
+        int length = hex.length / 2;
+        byte[] rawData = new byte[length];
+        for (int i = 0; i < length; i++) {
+            int high = Character.digit(hex[i * 2], 16);
+            int low = Character.digit(hex[i * 2 + 1], 16);
+            int value = (high << 4) | low;
+            if (value > 127) {
+                value -= 256;
+            }
+            rawData[i] = (byte) value;
+        }
+        return rawData;
+    }
+
+    public static float getRandomFloat(float min, float max) {
+        Random random = new Random();
+        return random.nextFloat() * (max - min) + min;
+    }
+
+    public static String getDatetime() {
+        return DateTimeFormatter.ofPattern("yyMMddHHmmss").format(LocalDateTime.now());
+    }
+
+    public static String getDatetime(String format) {
+        return DateTimeFormatter.ofPattern(format).format(LocalDateTime.now());
+    }
+
+    public static void showSoftKeyboard(final View view) {
+        if (view.requestFocus()) {
+            final InputMethodManager manager =
+                    (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (manager != null) {
-                manager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+                manager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
             }
-        }, 0);
+        }
     }
 
-    public static void hideSoftKeyboard(final Context context, final EditText editText) {
-        editText.clearFocus();
-        final InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    public static void hideSoftKeyboard(final View view) {
+        view.clearFocus();
+        final InputMethodManager manager =
+                (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (manager != null) {
-            manager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
-    public static boolean isGooglePlayServicesAvailable(AppCompatActivity activity, int requestCode) {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(activity.getApplicationContext());
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(activity, resultCode, requestCode)
-                        .show();
-            } else {
-                Timber.i("Google play services are not available!");
-                AlertUtil.showToast(activity.getApplicationContext(), activity.getString(R.string.fcm_not_supported_msg));
-                activity.finish();
-            }
-            return false;
-        }
-        return true;
+    public static void copyToClipboard(Context context, String label, String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
     }
 
     public static boolean handleUrl(Context context, String url) {
@@ -92,7 +114,7 @@ public class Util {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static boolean isFormEmpty(List<TextInputEditText> fields) {
+    public static boolean isFormEmpty(List<EditText> fields) {
         for (int i = 0; i < fields.size(); i++) {
             EditText editText = fields.get(i);
             if (!TextUtils.isEmpty(editText.getText())) {

@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.core.app.rule.Username;
-import com.core.app.ui.base.BaseDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.base.app.ui.base.BaseDialog;
 import com.core.app.util.AlertUtil;
+import com.core.app.util.Util;
 import com.custom.app.R;
-import com.google.android.material.textfield.TextInputEditText;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.Validator.ValidationListener;
@@ -24,8 +26,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,9 +43,9 @@ public class ForgotPasswordDialog extends BaseDialog implements ForgotPasswordVi
 
     @Order(1)
     @NotEmpty(sequence = 1, trim = true, messageResId = R.string.empty_username_msg)
-    @Username(sequence = 2, messageResId = R.string.invalid_username_msg)
+//  @Username(sequence = 2, messageResId = R.string.invalid_username_msg)
     @BindView(R.id.et_username)
-    TextInputEditText etUsername;
+    EditText etUsername;
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -54,7 +54,8 @@ public class ForgotPasswordDialog extends BaseDialog implements ForgotPasswordVi
     Button btnSubmit;
 
     @OnClick(R.id.btn_submit)
-    void submit() {
+    void submit(View view) {
+        Util.hideSoftKeyboard(view);
         validator.validate();
     }
 
@@ -63,26 +64,22 @@ public class ForgotPasswordDialog extends BaseDialog implements ForgotPasswordVi
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
+    @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        dialogView = inflater.inflate(R.layout.dialog_forgot_pwd, container, false);
+        unbinder = ButterKnife.bind(this, dialogView);
 
         validator = new Validator(this);
         validator.setValidationMode(Validator.Mode.IMMEDIATE);
-        validator.registerAnnotation(Username.class);
+//      validator.registerAnnotation(Username.class);
         validator.setValidationListener(this);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        dialogView = inflater.inflate(R.layout.dialog_forgot_pwd, container, false);
-        unbinder = ButterKnife.bind(this, dialogView);
 
         return dialogView;
     }

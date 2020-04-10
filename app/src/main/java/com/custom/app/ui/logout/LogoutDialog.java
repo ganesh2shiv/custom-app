@@ -8,14 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.core.app.ui.base.BaseDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.base.app.ui.base.BaseDialog;
 import com.core.app.util.AlertUtil;
 import com.custom.app.R;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -25,9 +26,6 @@ public class LogoutDialog extends BaseDialog implements LogoutView {
 
     private Unbinder unbinder;
     private Callback callback;
-
-    @Inject
-    Context context;
 
     @Inject
     LogoutPresenter presenter;
@@ -47,7 +45,7 @@ public class LogoutDialog extends BaseDialog implements LogoutView {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
         callback = (Callback) context;
@@ -55,7 +53,8 @@ public class LogoutDialog extends BaseDialog implements LogoutView {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View dialogView = inflater.inflate(R.layout.dialog_logout, container, false);
         unbinder = ButterKnife.bind(this, dialogView);
 
@@ -78,11 +77,11 @@ public class LogoutDialog extends BaseDialog implements LogoutView {
 
     @Override
     public void showLoginScreen() {
-        dismiss();
-
         if (callback != null) {
             callback.showLoginScreen();
         }
+
+        dismiss();
     }
 
     @Override

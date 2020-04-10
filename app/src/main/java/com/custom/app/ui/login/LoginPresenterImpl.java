@@ -25,9 +25,10 @@ public class LoginPresenterImpl extends LoginPresenter {
         disposable = interactor.login(username, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(userData -> {
+                .subscribe(response -> {
+
                     if (isViewAttached()) {
-                        view.showHomeScreen(userData);
+                        view.showHomeScreen(response);
                     }
                 }, error -> {
                     hideProgressBar();

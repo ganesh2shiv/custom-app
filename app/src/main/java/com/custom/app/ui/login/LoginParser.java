@@ -1,29 +1,21 @@
 package com.custom.app.ui.login;
 
-import com.custom.app.data.model.login.LoginResponse;
-
 import androidx.annotation.NonNull;
-import retrofit2.Response;
+
+import com.custom.app.data.model.login.LoginResponse;
 
 class LoginParser {
 
     @NonNull
-    static LoginResponse parse(Response<LoginResponse> response) throws NullPointerException {
-
-        if (response.isSuccessful()) {
-            LoginResponse body = response.body();
-
-            if (body.isStatus()) {
-                if (body.getUserData() != null) {
-                    return body;
-                } else {
-                    throw new RuntimeException("Response payload is empty!");
-                }
+    static LoginResponse parse(LoginResponse body) throws NullPointerException {
+        if (body.isStatus()) {
+            if (body.getUserData() != null) {
+                return body;
             } else {
-                throw new RuntimeException(body.getMsg());
+                throw new RuntimeException("Response payload is empty!");
             }
         } else {
-            throw new RuntimeException(response.message());
+            throw new RuntimeException(body.getMessage());
         }
     }
 }

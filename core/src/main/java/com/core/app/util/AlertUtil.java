@@ -1,7 +1,6 @@
 package com.core.app.util;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.PorterDuff;
 import android.view.View;
@@ -9,12 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.core.app.R;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+
+import com.core.app.R;
+import com.google.android.material.snackbar.Snackbar;
 
 public class AlertUtil {
 
@@ -75,8 +74,9 @@ public class AlertUtil {
         snackbar.setAction(action, listener).show();
     }
 
-    public static void showAlertDialog(Context context, CharSequence title, CharSequence msg, CharSequence actionName) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(context, R.style.CustomDialog);
+    public static void showAlertDialog(Context context, CharSequence title, CharSequence msg,
+                                       CharSequence actionName) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(title);
         alert.setMessage(msg);
         alert.setCancelable(true);
@@ -84,10 +84,20 @@ public class AlertUtil {
         alert.show();
     }
 
+    public static void showAlertDialog(Context context, CharSequence title, CharSequence msg,
+                                       CharSequence positiveAction, OnClickListener listener) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle(title);
+        alert.setMessage(msg);
+        alert.setCancelable(false);
+        alert.setPositiveButton(positiveAction, listener);
+        alert.show();
+    }
+
     public static void showActionAlertDialog(Context context, CharSequence msg,
                                              CharSequence negativeAction, CharSequence positiveAction,
-                                             DialogInterface.OnClickListener listener) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(context, R.style.CustomDialog);
+                                             OnClickListener listener) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setMessage(msg);
         alert.setCancelable(true);
         alert.setPositiveButton(positiveAction, listener);
@@ -98,7 +108,7 @@ public class AlertUtil {
     public static void showActionAlertDialog(Context context, CharSequence title, CharSequence msg,
                                              CharSequence negativeAction, CharSequence positiveAction,
                                              OnClickListener listener) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(context, R.style.CustomDialog);
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(title);
         alert.setMessage(msg);
         alert.setCancelable(true);
@@ -107,10 +117,20 @@ public class AlertUtil {
         alert.show();
     }
 
-    public static void showActionViewDialog(Context context, View view,
-                                            CharSequence negativeAction, CharSequence positiveAction,
-                                            OnClickListener listener) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(context, R.style.CustomDialog);
+    public static void showActionAlertDialog(Context context, CharSequence title, CharSequence msg,
+                                             boolean isCancelable, CharSequence positiveAction,
+                                             OnClickListener listener) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle(title);
+        alert.setMessage(msg);
+        alert.setCancelable(isCancelable);
+        alert.setPositiveButton(positiveAction, listener);
+        alert.show();
+    }
+
+    public static void showActionViewDialog(Context context, View view, CharSequence negativeAction,
+                                            CharSequence positiveAction, OnClickListener listener) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setView(view);
         alert.setCancelable(true);
         alert.setPositiveButton(positiveAction, listener);

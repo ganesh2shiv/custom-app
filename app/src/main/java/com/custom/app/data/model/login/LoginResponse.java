@@ -1,22 +1,32 @@
 package com.custom.app.data.model.login;
 
-import com.core.app.data.user.UserData;
+import com.user.app.data.UserData;
 
 public class LoginResponse {
 
     private boolean status;
-    private UserData userData;
-    private String msg;
+    private String message;
+    private String token;
+    private UserData user;
+    private String refreshToken;
 
     public boolean isStatus() {
         return status;
     }
 
-    public UserData getUserData() {
-        return userData;
+    public String getMessage() {
+        return message;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getToken() {
+        return token;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public UserData getUserData() {
+        return user;
     }
 }

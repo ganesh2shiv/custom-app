@@ -12,7 +12,8 @@ public class ChangePasswordPresenterImpl extends ChangePasswordPresenter {
     private PasswordInteractor passwordInteractor;
     private LogoutInteractor logoutInteractor;
 
-    public ChangePasswordPresenterImpl(PasswordInteractor passwordInteractor, LogoutInteractor logoutInteractor) {
+    public ChangePasswordPresenterImpl(PasswordInteractor passwordInteractor,
+                                       LogoutInteractor logoutInteractor) {
         this.passwordInteractor = passwordInteractor;
         this.logoutInteractor = logoutInteractor;
     }

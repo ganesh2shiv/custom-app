@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.base.app.ui.base.BaseFragment;
 import com.core.app.rule.OldPassword;
-import com.core.app.ui.base.BaseFragment;
 import com.core.app.util.AlertUtil;
+import com.core.app.util.Util;
 import com.custom.app.R;
 import com.custom.app.ui.logout.LogoutDialog.Callback;
-import com.google.android.material.textfield.TextInputEditText;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.Validator.ValidationListener;
@@ -26,8 +29,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,9 +44,6 @@ public class ChangePasswordFragment extends BaseFragment implements ChangePasswo
     private Validator validator;
 
     @Inject
-    Context context;
-
-    @Inject
     ChangePasswordPresenter presenter;
 
     @Order(1)
@@ -53,19 +51,19 @@ public class ChangePasswordFragment extends BaseFragment implements ChangePasswo
     @Pattern(sequence = 2, regex = "[a-zA-Z0-9]{8,}", messageResId = R.string.invalid_password_msg)
     @OldPassword(sequence = 3, messageResId = R.string.password_same_msg)
     @BindView(R.id.et_old_pwd)
-    TextInputEditText etOldPwd;
+    EditText etOldPwd;
 
     @Order(2)
     @NotEmpty(sequence = 1, trim = true, messageResId = R.string.empty_password_msg)
     @Password(sequence = 2, min = 8, scheme = ALPHA_NUMERIC, messageResId = R.string.invalid_password_msg)
     @BindView(R.id.et_new_pwd)
-    TextInputEditText etNewPwd;
+    EditText etNewPwd;
 
     @Order(3)
     @NotEmpty(sequence = 1, trim = true, messageResId = R.string.empty_password_msg)
     @ConfirmPassword(sequence = 2, messageResId = R.string.password_mismatch_msg)
     @BindView(R.id.et_confirm_pwd)
-    TextInputEditText etConfirmPwd;
+    EditText etConfirmPwd;
 
     @OnClick(R.id.btn_cancel)
     void cancel() {
@@ -73,7 +71,8 @@ public class ChangePasswordFragment extends BaseFragment implements ChangePasswo
     }
 
     @OnClick(R.id.btn_save)
-    void save() {
+    void save(View view) {
+        Util.hideSoftKeyboard(view);
         validator.validate();
     }
 
@@ -82,33 +81,29 @@ public class ChangePasswordFragment extends BaseFragment implements ChangePasswo
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
         callback = (Callback) context;
     }
 
+    @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_change_pwd, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
 
         validator = new Validator(this);
         validator.setValidationMode(Validator.Mode.IMMEDIATE);
         validator.registerAnnotation(OldPassword.class);
         validator.setValidationListener(this);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_change_pwd, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
 
         return rootView;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         presenter.setView(this);
@@ -121,8 +116,7 @@ public class ChangePasswordFragment extends BaseFragment implements ChangePasswo
 
         AlertUtil.showActionAlertDialog(context(), "Alert",
                 "Once the password is changed successfully, you will need to login again. Still want to proceed?",
-                getString(R.string.btn_no), getString(R.string.btn_yes),
-                (dialog, which) -> presenter.changePassword(oldPwd, newPwd));
+                getString(R.string.btn_no), getString(R.string.btn_yes), (dialog, which) -> presenter.changePassword(oldPwd, newPwd));
     }
 
     @Override
@@ -143,7 +137,7 @@ public class ChangePasswordFragment extends BaseFragment implements ChangePasswo
 
     @Override
     public void showMessage(String msg) {
-        AlertUtil.showToast(context, msg);
+        AlertUtil.showToast(context(), msg);
     }
 
     @Override

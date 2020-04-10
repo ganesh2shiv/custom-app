@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="transparent">#00ffffff</color>
+    <color name="trans_grey">#b3ffffff</color>
+    <color name="white">#1c1e20</color>
+    <color name="light_grey">#292929</color>
+    <color name="lighter_grey">#4c4c50</color>
+    <color name="medium_grey">#b1b1b1</color>
+    <color name="average_grey">#d3d3d3</color>
+    <color name="dark_grey">#f2f2f2</color>
+    <color name="black">#ffffff</color>
+
+</resources>
