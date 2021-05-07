@@ -12,9 +12,12 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
 
 @Module
-class BaseModule {
+@InstallIn(ApplicationComponent.class)
+public class BaseModule {
 
     @Provides
     @Singleton

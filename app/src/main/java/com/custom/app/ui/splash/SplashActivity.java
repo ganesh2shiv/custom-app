@@ -7,6 +7,11 @@ import com.core.app.util.ActivityUtil;
 import com.custom.app.ui.home.HomeActivity;
 import com.custom.app.ui.login.LoginActivity;
 
+import dagger.hilt.android.AndroidEntryPoint;
+import kotlinx.coroutines.InternalCoroutinesApi;
+
+@AndroidEntryPoint
+@InternalCoroutinesApi
 public class SplashActivity extends BaseActivity {
 
     @Override

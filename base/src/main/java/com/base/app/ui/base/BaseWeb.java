@@ -12,45 +12,34 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.base.app.R;
-import com.base.app.R2;
+import com.base.app.databinding.FragmentWebviewBinding;
 import com.core.app.util.AlertUtil;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 import static com.core.app.util.Constants.URL;
 
 public abstract class BaseWeb extends BaseFragment {
 
-    private Unbinder unbinder;
-
-    @BindView(R2.id.web_view)
-    WebView webView;
-
-    @BindView(R2.id.progress_bar)
-    ProgressBar progressBar;
+    private FragmentWebviewBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_webview, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
+        binding = FragmentWebviewBinding.inflate(inflater, container, false);
 
-        webView.setWebViewClient(new CustomWebViewClient(progressBar));
+        binding.webView.setWebViewClient(new CustomWebViewClient(binding.progressBar));
         if (getArguments() != null) {
-            webView.loadUrl(getArguments().getString(URL));
+            binding.webView.loadUrl(getArguments().getString(URL));
         }
-        return rootView;
+
+        return binding.getRoot();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
 
-        unbinder.unbind();
+        binding = null;
     }
 
     private class CustomWebViewClient extends WebViewClient {

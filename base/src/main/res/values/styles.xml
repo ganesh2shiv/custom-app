@@ -4,22 +4,22 @@
     <style name="CustomAppTheme" parent="BaseTheme" />
 
     <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/green</item>
-        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
 
-        <item name="colorSecondary">@color/green</item>
+        <item name="colorSecondary">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="colorPrimaryVariant">@color/dark_green</item>
-        <item name="colorSecondaryVariant">@color/dark_green</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorSecondaryVariant">@color/dark_blue</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColorSecondary">@color/average_grey</item>
 
         <item name="android:textColor">@color/average_grey</item>
-        <item name="colorAccent">@color/green</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="colorControlHighlight">@color/lighter_grey</item>
         <item name="colorControlNormal">@color/medium_grey</item>
-        <item name="colorControlActivated">@color/green</item>
+        <item name="colorControlActivated">@color/blue</item>
         <item name="spinnerStyle">@style/CustomSpinner</item>
         <item name="android:spinnerStyle">@style/CustomSpinner</item>
         <item name="android:fontFamily">@font/app_font</item>
@@ -39,6 +39,11 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/white</item>
+    </style>
+
+    <style name="TopBottomAnimation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/anim_top_bottom</item>
+        <item name="android:windowExitAnimation">@anim/anim_bottom_top</item>
     </style>
 
     <style name="CustomProgressBar" parent="Widget.AppCompat.ProgressBar">
@@ -85,9 +90,14 @@
     </style>
 
     <style name="CustomDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
-        <item name="colorPrimary">@color/dark_green</item>
+        <item name="colorPrimary">@color/dark_blue</item>
         <item name="materialButtonStyle">@style/Widget.AppCompat.Button.Borderless</item>
         <item name="android:textColorPrimary">@color/average_grey</item>
+    </style>
+
+    <style name="RatingBar" parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlNormal">@color/blue</item>
+        <item name="colorControlActivated">@color/blue</item>
     </style>
 
 </resources>

@@ -10,5 +10,6 @@
     <color name="average_grey">#d3d3d3</color>
     <color name="dark_grey">#f2f2f2</color>
     <color name="black">#ffffff</color>
+    <color name="trans_black">#bfffffff</color>
 
 </resources>

@@ -2,7 +2,6 @@ package com.base.app.ui.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -14,12 +13,6 @@ import com.base.app.R;
 public abstract class BaseFragment extends Fragment implements BaseView {
 
     private ProgressDialog progressDialog;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
 
     @Override
     public void close() {
@@ -54,7 +47,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         } else {
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getString(R.string.processing_msg));
-            progressDialog.setCancelable(false);
+            progressDialog.setCancelable(true);
             progressDialog.show();
         }
     }
@@ -67,7 +60,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     }
 
     @Override
-    public void showMessage(String msg) {
+    public void showMessage(@Nullable String msg) {
     }
 
     @Override
@@ -82,8 +75,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         if (!fragment.isVisible() && getFragmentManager() != null) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.layout_main, fragment, tag)
-                    .addToBackStack(null)
-                    .commit();
+//                  .addToBackStack(null)
+                    .commitAllowingStateLoss();
         }
     }
 }

@@ -8,6 +8,8 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor;
 import com.chuckerteam.chucker.api.RetentionManager;
 import com.core.app.BuildConfig;
 import com.data.app.prefs.StringPreference;
+import com.network.app.api.ApiHelper;
+import com.network.app.api.ApiHelperImpl;
 import com.network.app.oauth.OAuthTokenManager;
 import com.network.app.oauth.TokenAuthenticator;
 
@@ -28,6 +30,8 @@ import javax.net.ssl.X509TrustManager;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -36,6 +40,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import timber.log.Timber;
 
 @Module
+@InstallIn(ApplicationComponent.class)
 public class HttpModule {
 
     private static final int READ_TIME_OUT = 30;
@@ -46,6 +51,12 @@ public class HttpModule {
     @Singleton
     StringPreference provideApiEndpoint(SharedPreferences prefs) {
         return new StringPreference(prefs, "baseUrl", ApiEndpoint.RELEASE.url);
+    }
+
+    @Provides
+    @Singleton
+    ApiHelper provideApiHelper(ApiHelperImpl apiHelper) {
+        return apiHelper;
     }
 
     @Provides
@@ -125,7 +136,7 @@ public class HttpModule {
                 .baseUrl(BuildConfig.DEBUG ? apiManager.getApiEndpoint() : ApiEndpoint.RELEASE.url)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxCallAdapterFactory.create())
+                .addCallAdapterFactory(new RetrofitAdapterFactory())
                 .client(okHttpClient)
                 .build();
     }

@@ -7,8 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import com.base.app.R;
 import com.core.app.util.AlertUtil;
 
+import dagger.hilt.android.AndroidEntryPoint;
+import kotlinx.coroutines.InternalCoroutinesApi;
+
 import static com.base.app.util.Constants.BACK_PRESS_INTERVAL;
 
+@AndroidEntryPoint
+@InternalCoroutinesApi
 public abstract class BaseHome extends BaseActivity {
 
     private Handler backPressHandler = new Handler();

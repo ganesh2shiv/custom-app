@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_appbar_empty" />
+    <include
+        android:id="@+id/include_appbar"
+        layout="@layout/layout_appbar_empty" />
 
     <FrameLayout
         android:id="@+id/layout_main"

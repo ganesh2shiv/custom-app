@@ -14,14 +14,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.base.app.ui.base.BaseFragment;
 import com.custom.app.R;
+import com.custom.app.databinding.FragmentHomeBinding;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import dagger.hilt.android.AndroidEntryPoint;
+import kotlinx.coroutines.InternalCoroutinesApi;
 
+@AndroidEntryPoint
+@InternalCoroutinesApi
 public class HomeFragment extends BaseFragment implements HomeView {
 
-    private Unbinder unbinder;
     private Callback callback;
+    private FragmentHomeBinding binding;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -37,10 +40,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        return rootView;
+        return binding.getRoot();
     }
 
 
@@ -62,7 +64,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void onDestroyView() {
         super.onDestroyView();
 
-        unbinder.unbind();
+        binding = null;
     }
 
     @Override

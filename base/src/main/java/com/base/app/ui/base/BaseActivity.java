@@ -3,38 +3,37 @@ package com.base.app.ui.base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
-import com.base.app.BaseApplication;
 import com.base.app.R;
 import com.core.app.util.Util;
-import com.data.app.event.EventMessage;
+import com.google.android.material.textfield.TextInputLayout;
 import com.network.app.http.ApiEndpoint;
 import com.network.app.http.ApiManager;
-import com.network.app.oauth.OAuthTokenManager;
 import com.network.app.oauth.TokenAuthenticator;
-import com.network.app.oauth.TokenService;
 import com.network.app.ui.NetworkErrorFragment;
 import com.user.app.data.UserManager;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+import kotlinx.coroutines.InternalCoroutinesApi;
 
 import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
 import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
-import static com.network.app.util.Constants.EVENT_CONNECTIVITY_CONNECTED;
-import static com.network.app.util.Constants.EVENT_CONNECTIVITY_LOST;
-import static com.network.app.util.Constants.NETWORK_ERROR_FRAGMENT;
 
+@AndroidEntryPoint
+@InternalCoroutinesApi
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     @Inject
@@ -44,12 +43,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected UserManager userManager;
 
     @Inject
-    protected TokenService tokenService;
-
-    @Inject
-    protected OAuthTokenManager tokenManager;
-
-    @Inject
     protected TokenAuthenticator tokenAuthenticator;
 
     private ProgressDialog progressDialog;
@@ -57,7 +50,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((BaseApplication) getApplication()).getBaseComponent().inject(this);
 
         if (userManager.isNightMode()) {
             if (AppCompatDelegate.getDefaultNightMode() != MODE_NIGHT_YES) {
@@ -72,8 +64,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
 
         tokenAuthenticator.setCallingActivity(this);
-
-        tokenManager.setTokenService(tokenService);
 
         if (networkErrorFragment == null) {
             networkErrorFragment = NetworkErrorFragment.newInstance();
@@ -136,48 +126,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         return super.onOptionsItemSelected(item);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(EventMessage event) {
-        switch (event.getResultCode()) {
-            case EVENT_CONNECTIVITY_LOST:
-                showNetworkErrorFragmentIfNotShowing();
-                break;
-            case EVENT_CONNECTIVITY_CONNECTED:
-                dismissNetworkErrorFragmentIfShowing();
-                break;
-        }
-    }
-
-    protected void showNetworkErrorFragmentIfNotShowing() {
-        if (!isNetworkErrorFragmentShowing()) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, networkErrorFragment, NETWORK_ERROR_FRAGMENT)
-                    .commit();
-        }
-    }
-
-    protected void dismissNetworkErrorFragmentIfShowing() {
-        if (isNetworkErrorFragmentShowing()) {
-            getSupportFragmentManager().beginTransaction().remove(networkErrorFragment).commit();
-        }
-    }
-
-    private boolean isNetworkErrorFragmentShowing() {
-        return networkErrorFragment != null && networkErrorFragment.isVisible();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//      EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-//      EventBus.getDefault().unregister(this);
-    }
-
     @Override
     public void close() {
         finish();
@@ -209,7 +157,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         } else {
             progressDialog = new ProgressDialog(this);
             progressDialog.setMessage(getString(R.string.processing_msg));
-            progressDialog.setCancelable(false);
+            progressDialog.setCancelable(true);
             progressDialog.show();
         }
     }
@@ -222,7 +170,24 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
-    public void showMessage(String msg) {
+    public void showMessage(@Nullable String msg) {
+    }
+
+    public TextWatcher AutoErrorTextWatcher(final TextInputLayout til) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                til.setError("");
+            }
+        };
     }
 
     protected void fragmentTransition(Fragment fragment, String tag) {

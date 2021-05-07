@@ -10,6 +10,7 @@
         android:label="@string/title_app"
         android:largeHeap="true"
         android:theme="@style/CustomAppTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="android:name, android:allowBackup, android:label, android:theme">
 
         <activity

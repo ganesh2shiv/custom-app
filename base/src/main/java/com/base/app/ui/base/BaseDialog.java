@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.base.app.BaseApplication;
 import com.core.app.R;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationSettingsRequest;
@@ -19,8 +18,12 @@ import com.user.app.data.UserManager;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+import kotlinx.coroutines.InternalCoroutinesApi;
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider;
 
+@AndroidEntryPoint
+@InternalCoroutinesApi
 public class BaseDialog extends DialogFragment implements BaseView {
 
     private ProgressDialog progressDialog;
@@ -41,23 +44,11 @@ public class BaseDialog extends DialogFragment implements BaseView {
     protected ReactiveLocationProvider locationProvider;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         if (getDialog().getWindow() != null) {
             getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        ((BaseApplication) getActivity().getApplication()).getBaseComponent().inject(this);
-        super.onAttach(context);
     }
 
     @NonNull
@@ -101,7 +92,7 @@ public class BaseDialog extends DialogFragment implements BaseView {
         } else {
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getString(R.string.processing_msg));
-            progressDialog.setCancelable(false);
+            progressDialog.setCancelable(true);
             progressDialog.show();
         }
     }
@@ -114,6 +105,6 @@ public class BaseDialog extends DialogFragment implements BaseView {
     }
 
     @Override
-    public void showMessage(String msg) {
+    public void showMessage(@Nullable String msg) {
     }
 }

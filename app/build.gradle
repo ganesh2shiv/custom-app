@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 apply from: '../config.gradle'
 
@@ -27,21 +29,13 @@ android {
     }
 }
 
-configurations {
-    all {
-        exclude module: 'commons-logging'
-    }
-}
-
 dependencies {
     implementation project(':base')
 
-    annotationProcessor "org.parceler:parceler:${parcelerVer}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVer}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVer}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVer}"
+    implementation "com.google.dagger:hilt-android:${hiltVer}"
+    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+    kapt "com.google.dagger:hilt-android-compiler:${hiltVer}"
     annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVer}"
-    annotationProcessor "com.github.bumptech.glide:compiler:${glideVer}"
 
-    implementation 'com.shreyaspatil:MaterialNavigationView:1.2'
+    implementation "com.shreyaspatil:MaterialNavigationView:1.2"
 }

@@ -9,10 +9,13 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider;
 import pl.charmas.android.reactivelocation2.ReactiveLocationProviderConfiguration;
 
 @Module
+@InstallIn(ApplicationComponent.class)
 public class LocationModule {
 
     private static final int LOCATION_UPDATE_INTERVAL = 10 * 1000;

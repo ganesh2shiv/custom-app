@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/layout_appbar_empty" />
+        <include
+            android:id="@+id/include_appbar"
+            layout="@layout/layout_appbar_empty" />
 
         <FrameLayout
             android:id="@+id/layout_main"
@@ -78,6 +80,7 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <include
+            android:id="@+id/include_fab"
             layout="@layout/layout_fab_ghost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

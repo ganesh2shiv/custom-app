@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 apply from: '../config.gradle'
 
@@ -9,9 +9,8 @@ dependencies {
     implementation project(':core')
     implementation project(':data')
 
-    annotationProcessor "org.parceler:parceler:${parcelerVer}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVer}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVer}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVer}"
+    implementation "com.google.dagger:hilt-android:${hiltVer}"
+    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+    kapt "com.google.dagger:hilt-android-compiler:${hiltVer}"
     annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVer}"
 }

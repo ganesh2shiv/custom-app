@@ -7,8 +7,6 @@ import androidx.annotation.NonNull;
 
 import com.airbnb.epoxy.EpoxyHolder;
 
-import butterknife.ButterKnife;
-
 public abstract class BaseHolder extends EpoxyHolder {
 
     private View itemView;
@@ -17,7 +15,6 @@ public abstract class BaseHolder extends EpoxyHolder {
     @Override
     protected void bindView(@NonNull View itemView) {
         this.itemView = itemView;
-        ButterKnife.bind(this, itemView);
     }
 
     public View getItemView() {

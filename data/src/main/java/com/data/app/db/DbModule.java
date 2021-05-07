@@ -13,10 +13,13 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 @Module
+@InstallIn(ApplicationComponent.class)
 public final class DbModule {
 
     @Provides

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 apply from: '../config.gradle'
 
@@ -9,19 +9,20 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVer}"
 
     // DI
-    api "com.google.dagger:dagger:${daggerVer}"
-    api "com.google.dagger:dagger-android:${daggerVer}"
-    api "com.google.dagger:dagger-android-support:${daggerVer}"
-    api "com.jakewharton:butterknife:${butterKnifeVer}"
+    api "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
 
     // Rx
-    api "io.reactivex.rxjava2:rxjava:2.2.3"
     api "io.reactivex.rxjava2:rxandroid:2.1.0"
     api "com.github.tbruyelle:rxpermissions:0.10.2"
-    api "com.jakewharton.rxbinding2:rxbinding:${rxBindingVer}"
-    api "com.jakewharton.rxbinding2:rxbinding-design:${rxBindingVer}"
-    api "com.jakewharton.rxbinding2:rxbinding-support-v4:${rxBindingVer}"
-    api "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rxBindingVer}"
+
+    // Coroutine
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6"
+
+    // Lifecycle
+    api "android.arch.lifecycle:extensions:1.1.1"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-rc01"
 
     // UI
     api "me.relex:circleindicator:1.2.2@aar"
@@ -34,10 +35,10 @@ dependencies {
     api "com.github.castorflex.smoothprogressbar:library-circular:1.3.0"
 
     // AndroidX
-    api "androidx.fragment:fragment:1.2.2"
     api "androidx.multidex:multidex:2.0.1"
     api "androidx.cardview:cardview:1.0.0"
     api "androidx.appcompat:appcompat:1.1.0"
+    api 'androidx.fragment:fragment-ktx:1.2.5'
     api "androidx.preference:preference:1.1.0"
     api "androidx.gridlayout:gridlayout:1.0.0"
     api "androidx.legacy:legacy-support-v4:1.0.0"
@@ -47,11 +48,8 @@ dependencies {
 
     // Util
     api "id.zelory:compressor:2.1.0"
-    api "org.greenrobot:eventbus:3.1.1"
     api "com.jakewharton.timber:timber:4.7.1"
     api "com.github.jrvansuita:PickImage:2.2.4"
     api "com.jakewharton:process-phoenix:2.0.0"
-    api "com.mobsandgeeks:android-saripaar:2.0.3"
-    api "org.parceler:parceler-api:${parcelerVer}"
     api "com.jakewharton.threetenabp:threetenabp:1.2.2"
 }

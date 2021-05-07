@@ -1,23 +1,20 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 apply from: '../config.gradle'
 
 dependencies {
     implementation project(':core')
 
-    annotationProcessor "org.parceler:parceler:${parcelerVer}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVer}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVer}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVer}"
+    implementation "com.google.dagger:hilt-android:${hiltVer}"
+    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+    kapt "com.google.dagger:hilt-android-compiler:${hiltVer}"
     annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVer}"
 
     api "com.squareup.sqlbrite3:sqlbrite:3.2.0"
     debugImplementation "im.dino:dbinspector:3.4.1@aar"
     implementation "androidx.sqlite:sqlite-framework:2.0.0"
-    annotationProcessor "com.ryanharter.auto.value:auto-value-parcel:0.2.6"
-    annotationProcessor "com.google.auto.value:auto-value:${autovalueVer}"
-    compileOnly "com.jakewharton.auto.value:auto-value-annotations:${autovalueVer}"
 }

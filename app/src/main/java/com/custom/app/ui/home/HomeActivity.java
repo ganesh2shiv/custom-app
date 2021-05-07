@@ -13,9 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
@@ -24,24 +22,19 @@ import com.base.app.ui.base.BaseHome;
 import com.core.app.BuildConfig;
 import com.core.app.util.ActivityUtil;
 import com.core.app.util.AlertUtil;
-import com.custom.app.CustomApp;
 import com.custom.app.R;
+import com.custom.app.databinding.ActivityHomeBinding;
 import com.custom.app.ui.login.LoginActivity;
 import com.custom.app.ui.logout.LogoutDialog;
 import com.custom.app.ui.setting.SettingActivity;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
 import com.google.gson.Gson;
 import com.media.app.GlideApp;
 import com.user.app.data.UserData;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnLongClick;
+import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
+import kotlinx.coroutines.InternalCoroutinesApi;
 
 import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
 import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
@@ -50,52 +43,23 @@ import static com.core.app.util.Constants.LOCATION_SETTINGS_REQUEST;
 import static com.custom.app.util.Constants.HOME_FRAGMENT;
 import static com.custom.app.util.Constants.LOGOUT_DIALOG;
 
+@AndroidEntryPoint
+@InternalCoroutinesApi
 public class HomeActivity extends BaseHome implements HomeFragment.Callback,
         OnNavigationItemSelectedListener, OnBackStackChangedListener, LogoutDialog.Callback {
 
     private MenuItem selectedMenuItem;
     private ActionBarDrawerToggle drawerToggle;
 
-    @BindView(R.id.appbar_layout)
-    AppBarLayout appBarLayout;
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
-
-    @BindView(R.id.nav_view)
-    NavigationView navView;
-
-    @OnLongClick(R.id.toolbar)
-    boolean toggleFabGhost() {
-        if (BuildConfig.DEBUG) {
-            if (fabGhost.getVisibility() == View.VISIBLE) {
-                fabGhost.hide();
-            } else {
-                fabGhost.show();
-            }
-        }
-        return true;
-    }
-
-    @BindView(R.id.fab_ghost)
-    FloatingActionButton fabGhost;
-
-    @OnClick(R.id.fab_ghost)
-    public void showGhostMenu(View view) {
-        super.showGhostMenu(view);
-    }
+    private ActivityHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((CustomApp) getApplication()).getHomeComponent().inject(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.includeAppbar.includeToolbar.toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -104,7 +68,14 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
-        SwitchCompat switchNight = (SwitchCompat) navView.getMenu().findItem(R.id.nav_menu_night).getActionView();
+        binding.includeFab.fabGhost.setOnClickListener(this::showGhostMenu);
+
+        binding.includeAppbar.includeToolbar.toolbar.setOnLongClickListener(view -> {
+            showHideGhostFab();
+            return true;
+        });
+
+        SwitchCompat switchNight = (SwitchCompat) binding.navView.getMenu().findItem(R.id.nav_menu_night).getActionView();
         switchNight.setChecked(userManager.isNightMode());
         switchNight.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (!isChecked) {
@@ -116,7 +87,8 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
             }
         });
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout,
+                binding.includeAppbar.includeToolbar.toolbar,
                 R.string.nav_drawer_open, R.string.nav_drawer_close) {
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -146,18 +118,18 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
             }
         };
 
-        drawerLayout.addDrawerListener(drawerToggle);
+        binding.drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerToggle.syncState();
 
-        navView.setNavigationItemSelectedListener(this);
-        navView.setItemIconTintList(null);
+        binding.navView.setNavigationItemSelectedListener(this);
+        binding.navView.setItemIconTintList(null);
 
-        toolbar.setNavigationOnClickListener(v -> {
+        binding.includeAppbar.includeToolbar.toolbar.setNavigationOnClickListener(v -> {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.layout_main);
 
             if (currentFragment instanceof HomeFragment) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                binding.drawerLayout.openDrawer(GravityCompat.START);
             } else {
                 onBackPressed();
             }
@@ -167,7 +139,7 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
             String jsonData = userManager.getUserData();
             UserData user = new Gson().fromJson(jsonData, UserData.class);
             if (user != null) {
-                View headerLayout = navView.getHeaderView(0);
+                View headerLayout = binding.navView.getHeaderView(0);
                 headerLayout.setOnClickListener(v -> showProfileScreen());
                 CircleImageView civProfile = headerLayout.findViewById(R.id.civ_profile);
                 GlideApp.with(this).load(user.getProfile())
@@ -196,7 +168,7 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        drawerLayout.closeDrawer(GravityCompat.START);
+        binding.drawerLayout.closeDrawer(GravityCompat.START);
         if (selectedMenuItem != menuItem) {
             selectedMenuItem = menuItem;
             return true;
@@ -210,7 +182,7 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
 
         if (currentFragment instanceof HomeFragment) {
             drawerToggle.syncState();
-            navView.setCheckedItem(R.id.nav_menu_home);
+            binding.navView.setCheckedItem(R.id.nav_menu_home);
         }
     }
 
@@ -243,6 +215,17 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
         ActivityUtil.startActivity(this, intent, true);
     }
 
+    private boolean showHideGhostFab() {
+        if (BuildConfig.DEBUG) {
+            if (binding.includeFab.fabGhost.getVisibility() == View.VISIBLE) {
+                binding.includeFab.fabGhost.hide();
+            } else {
+                binding.includeFab.fabGhost.show();
+            }
+        }
+        return true;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -258,17 +241,10 @@ public class HomeActivity extends BaseHome implements HomeFragment.Callback,
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        ((CustomApp) getApplication()).releaseHomeComponent();
     }
 }

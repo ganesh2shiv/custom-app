@@ -2,7 +2,7 @@
 <resources>
 
     <color name="transparent">#00000000</color>
-    <color name="trans_grey">#b3ffffff</color>
+    <color name="trans_grey">#bfffffff</color>
     <color name="white">#ffffff</color>
     <color name="light_grey">#f2f2f2</color>
     <color name="lighter_grey">#d3d3d3</color>
@@ -10,18 +10,23 @@
     <color name="average_grey">#4c4c50</color>
     <color name="dark_grey">#232325</color>
     <color name="black">#000000</color>
+    <color name="trans_black">#bf000000</color>
 
-    <color name="trans_blue">#b65192ce</color>
-    <color name="blue">#5192ce</color>
-    <color name="dark_blue">#136eb1</color>
+    <color name="dot_blue">#6fd9e4</color>
+    <color name="trans_blue">#b651b7c1</color>
+    <color name="blue">#51b7c1</color>
+    <color name="dark_blue">#49a4ad</color>
+    <color name="light_blue">#74c5cd</color>
+    <color name="lighter_blue">#dcf1f3</color>
     <color name="yellow">#cebd30</color>
     <color name="golden">#c1982b</color>
     <color name="orange">#fe4c13</color>
     <color name="light_orange">#f29720</color>
-    <color name="red">#ff0000</color>
+    <color name="red">#e30513</color>
+    <color name="dark_red">#c91c4a</color>
     <color name="light_red">#d9534f</color>
-    <color name="green">#ffa500</color>
-    <color name="dark_green">#ffa500</color>
-    <color name="trans_green">#1fffa500</color>
+    <color name="green">#4caf50</color>
+    <color name="dark_green">#388e3c</color>
+    <color name="trans_green">#1f4caf50</color>
 
 </resources>

@@ -1,17 +1,22 @@
 package com.custom.app;
 
-import com.custom.app.network.RestService;
+import com.network.app.api.ApiService;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
 import retrofit2.Retrofit;
 
 @Module
+@InstallIn(ApplicationComponent.class)
 class AppModule {
 
     @Provides
-    @AppScope
-    RestService provideRestService(Retrofit retrofit) {
-        return retrofit.create(RestService.class);
+    @Singleton
+    ApiService provideApiService(Retrofit retrofit) {
+        return retrofit.create(ApiService.class);
     }
 }

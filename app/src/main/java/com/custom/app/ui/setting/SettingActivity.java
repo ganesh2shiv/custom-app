@@ -3,26 +3,27 @@ package com.custom.app.ui.setting;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
 
 import com.base.app.ui.base.BaseActivity;
 import com.custom.app.R;
+import com.custom.app.databinding.ActivitySettingBinding;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import dagger.hilt.android.AndroidEntryPoint;
+import kotlinx.coroutines.InternalCoroutinesApi;
 
+@AndroidEntryPoint
+@InternalCoroutinesApi
 public class SettingActivity extends BaseActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    private ActivitySettingBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-        ButterKnife.bind(this);
+        binding = ActivitySettingBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.includeAppbar.includeToolbar.toolbar);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
